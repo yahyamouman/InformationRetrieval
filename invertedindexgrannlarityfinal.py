@@ -61,11 +61,16 @@ FILE_LIST = [FILE_DIRECTORY + "/" + filename for filename in os.listdir(FILE_DIR
 stop_words_filename = ""
 parser = etree.XMLParser(recover=True)
 
+
+parse_step=-1
 def walkTreeForElemnts(document_path, elementsList):
     '''
     Takes an XML document path to extract "XPath" of all elements in elementsList as well as their content as text only and puts it in elementsPathTexts[docId]
     '''
+    global parse_step
     global path_data_list
+    parse_step+=1
+    print("Parsing (",parse_step,"/9804) :",document_path)
     tree = etree.parse(document_path, parser=parser)
     docId = tree.getroot().find(".//id").text
     for elem in tree.iter():
